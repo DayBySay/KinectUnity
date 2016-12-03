@@ -15,7 +15,13 @@ public class BodySourceManager : MonoBehaviour
             return _Sensor;
         }
     }
-    
+
+    public Windows.Kinect.Vector4 FloorClipPlane
+    {
+        get;
+        private set;
+    }
+
     public Body[] GetData()
     {
         return _Data;
@@ -50,7 +56,10 @@ public class BodySourceManager : MonoBehaviour
                 }
                 
                 frame.GetAndRefreshBodyData(_Data);
-                
+
+                // FloorClipPlaneを取得する
+                FloorClipPlane = frame.FloorClipPlane;
+
                 frame.Dispose();
                 frame = null;
             }
